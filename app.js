@@ -19,6 +19,8 @@ app.use(cors({
   origin: [
     'http://localhost:3000',
     'http://localhost:3001',
+    'https://movies-diplom.nomoredomains.xyz',
+    'http://movies-diplom.nomoredomains.xyz',
   ],
 }));
 
