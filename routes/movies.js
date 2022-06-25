@@ -20,14 +20,14 @@ moviesRouter.post('/movies', celebrate({
     image: Joi.string().required(),
     trailerLink: Joi.string().required(),
     thumbnail: Joi.string().required(),
-    movieId: Joi.string().required(),
+    movieId: Joi.number().required(),
     nameRU: Joi.string().required(),
     nameEN: Joi.string().required(),
   }),
 }), saveMovie);
 moviesRouter.delete('/movies/:movieId', celebrate({
   params: Joi.object().keys({
-    movieId: Joi.string().length(24),
+    movieId: Joi.string().hex().length(24),
   }),
 }), deleteMovie);
 
