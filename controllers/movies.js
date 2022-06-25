@@ -67,8 +67,8 @@ const deleteMovie = async (req, res, next) => {
       next(new ForbiddenError('У вас нет доступа'));
       return;
     }
-    const deletedMovie = await Movie.findByIdAndDelete(movie);
-    res.status(200).send(deletedMovie);
+    await movie.remove();
+    res.status(200).send({ message: 'Фильм удален' });
   } catch (err) {
     if (err.name === 'CastError') {
       next(new BadRequestError(`Введены некорректные данные: ${err.message}`));
