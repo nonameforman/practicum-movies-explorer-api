@@ -64,11 +64,7 @@ const getCurrentUser = async (req, res, next) => {
       res.status(200).send(user);
     }
   } catch (err) {
-    if (err.name === 'CastError') {
-      next(new BadRequestError(`Введены некорректные данные: ${err.message}`));
-    } else {
-      next(err);
-    }
+    next(err);
   }
 };
 
