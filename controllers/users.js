@@ -15,10 +15,6 @@ const { NODE_ENV, JWT_SECRET } = process.env;
 
 const register = async (req, res, next) => {
   const { email, password, name } = req.body;
-  if (!email || !password || !name) {
-    next(new BadRequestError('Не введен логин/пароль'));
-    return;
-  }
   try {
     const hash = await bcrypt.hash(password, SALT_ROUNDS);
     let user = await User.create({
@@ -42,10 +38,6 @@ const register = async (req, res, next) => {
 
 const login = async (req, res, next) => {
   const { email, password } = req.body;
-  if (!email || !password) {
-    next(new BadRequestError('Не введен логин/пароль'));
-    return;
-  }
   try {
     const user = await User.findOne({ email }).select('+password');
     if (!user) {
