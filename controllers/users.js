@@ -83,6 +83,8 @@ const editUser = async (req, res, next) => {
   } catch (err) {
     if (err.name === 'ValidationError') {
       next(new BadRequestError('Введены некорректные данные'));
+    } else if (err.code === MONGO_ERROR) {
+      next(new ConflictError('Пользователь c такой почтой уже есть'));
     } else {
       next(err);
     }
