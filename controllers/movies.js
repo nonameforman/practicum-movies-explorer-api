@@ -8,7 +8,8 @@ const {
 
 const getFavMovies = async (req, res, next) => {
   try {
-    const movies = await Movie.find({});
+    const owner = req.user._id;
+    const movies = await Movie.find({ owner });
     res.status(200).send(movies);
   } catch (err) {
     next(err);
