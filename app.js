@@ -9,7 +9,6 @@ const { PORT, MONGODB } = require('./config');
 const routes = require('./routes/index');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const handleError = require('./middlewares/handleError');
-const { NotFoundError } = require('./errors/index');
 
 const app = express();
 
@@ -36,10 +35,6 @@ connectMongo();
 app.use(requestLogger);
 
 app.use(routes);
-
-app.use((req, res, next) => {
-  next(new NotFoundError('Такой страницы не существует'));
-});
 
 app.use(errorLogger);
 app.use(errors());
